@@ -8,24 +8,26 @@ import Feather  from '@expo/vector-icons/Feather';
 import {Spacings} from "@/constants/Spacings";
 import {Radiuses} from "@/constants/Radiuses";
 import {Link} from "expo-router";
+import {JSX} from "react";
 
 export interface LinkCardProps {
-    url: string
+    url?: string
     title?: string
+    onPress?: () => void
 }
 
-export const LinkCard = ({ url, title }: LinkCardProps) => {
+export const LinkCard = ({ url, title, onPress }: LinkCardProps) => {
     const symbolColor = useThemeColor({}, 'primary');
     const backgroundColor = useThemeColor({}, 'background');
 
-    return (
-        <Link href={url}>
-            <Pressable style={({ pressed }) => [{ backgroundColor, borderColor: backgroundColor }, pressed && { borderColor: symbolColor }, styles.card]}>
-                <ThemedText type='default'>{title}</ThemedText>
-                <Feather name="arrow-right" size={18} color={symbolColor} />
-            </Pressable>
-        </Link>
-    )
+    const main = (
+        <Pressable onPress={onPress} style={({ pressed }) => [{ backgroundColor, borderColor: backgroundColor }, pressed && { borderColor: symbolColor }, styles.card]}>
+            <ThemedText type='default'>{title}</ThemedText>
+            <Feather name="arrow-right" size={18} color={symbolColor} />
+        </Pressable>
+    ) as JSX.Element
+
+    return url ? <Link href={url}>{main}</Link> : main
 }
 
 export const styles = StyleSheet.create({

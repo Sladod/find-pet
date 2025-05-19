@@ -45,5 +45,9 @@
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0"
   },
+  "strapi": {
+    "uuid": "edc93375-b690-4e27-9b44-4b994caaccf1",
+    "installId": "c61de9701c439e0dccbbd27c924b0ea44446ef6c89d2de10c228e795072cd54c"
+  },
   "private": true
 }

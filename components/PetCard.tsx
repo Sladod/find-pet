@@ -45,14 +45,15 @@ const styles = StyleSheet.create({
         padding: Spacings.sm,
         borderRadius: Radiuses.md,
         justifyContent: 'flex-end',
+        position: 'relative',
     },
     coverImage: {
-        width: '100%',
-        height: '100%',
+        right: 0,
+        top: 0,
         position: 'absolute',
         left: 0,
         bottom: 0,
-        borderRadius: 'inherit',
+        borderRadius: Radiuses.md,
         objectFit: 'cover',
     },
     details: {

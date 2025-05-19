@@ -1,3 +1,4 @@
+import React from "react";
 import { Image } from 'expo-image';
 import { StyleSheet, View } from 'react-native';
 
@@ -6,15 +7,15 @@ import { ParallaxScrollView } from "@/components/ParallaxScrollView";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { IconButton } from "@/components/IconButton";
 import { Feather} from "@expo/vector-icons";
-import React from "react";
-import {useGoBack} from "@/hooks/useGoBack";
-import {Separator} from "@/components/Separator";
-import {PetInfoList} from "@/components/PetInfoList";
-import {Button} from "@/components/Button";
+import { useGoBack } from "@/hooks/useGoBack";
+import { Separator } from "@/components/Separator";
+import { PetInfoList } from "@/components/PetInfoList";
+import { Button } from "@/components/Button";
+import {useSafeAreaInsets} from "react-native-safe-area-context";
 
 export default function Explore() {
-    const textReverseColor = useThemeColor({}, 'textReverse')
     const goBack = useGoBack()
+    const { top, bottom } = useSafeAreaInsets()
 
     return (
         <ParallaxScrollView
@@ -22,16 +23,19 @@ export default function Explore() {
             headerImage={
                 <View style={styles.header}>
                     <Image source={require('@/assets/images/img_1.png')} style={styles.headerImage} />
-                    <View style={styles.headerMain}>
+                    <View style={[styles.headerMain, { paddingTop: top }]}>
                         <IconButton onPress={goBack}>
                             <Feather name="arrow-left" size={24} color='#000' />
                         </IconButton>
                     </View>
-                    <ThemedText type='title' lightColor={textReverseColor} darkColor={textReverseColor}>Оливер</ThemedText>
+                    <ThemedText type='title' lightColor='black' darkColor='black'>Оливер</ThemedText>
                 </View>
             }
         >
-            <ThemedText>Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона</ThemedText>
+            <ThemedText>
+                Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться.
+                Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона
+            </ThemedText>
             <Separator />
             <PetInfoList />
             <Button variant='secondary' title='Забрать' />
@@ -44,9 +48,9 @@ const styles = StyleSheet.create({
     headerImage: {
         left: 0,
         top: 0,
+        right: 0,
+        bottom: 0,
         position: 'absolute',
-        width: '100%',
-        height: '100%',
     },
     headerMain: {
         flex: 1,

@@ -12,6 +12,7 @@ import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { DefaultStyle } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 import {Spacings} from "@/constants/Spacings";
+import {useSafeAreaInsets} from "react-native-safe-area-context";
 
 const HEADER_HEIGHT = 400;
 
@@ -26,6 +27,7 @@ export const ParallaxScrollView = ({
   headerBackgroundColor,
 }: ParallaxScrollViewProps) => {
   const colorScheme = useColorScheme() ?? 'light';
+  const { bottom: bottomEdge } = useSafeAreaInsets()
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
   const bottom = useBottomTabOverflow();
@@ -47,7 +49,7 @@ export const ParallaxScrollView = ({
   });
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.container, { paddingBottom: bottomEdge }]}>
       <Animated.ScrollView
         ref={scrollRef}
         scrollEventThrottle={16}
