@@ -10,19 +10,21 @@ import Animated, {
 import { ThemedView } from '@/components/ThemedView';
 import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { DefaultStyle } from "react-native-reanimated/lib/typescript/hook/commonTypes";
+import {Spacings} from "@/constants/Spacings";
 
-const HEADER_HEIGHT = 250;
+const HEADER_HEIGHT = 400;
 
-type Props = PropsWithChildren<{
-  headerImage: ReactElement;
+type ParallaxScrollViewProps = PropsWithChildren<{
+  headerImage: JSX.Element;
   headerBackgroundColor: { dark: string; light: string };
 }>;
 
-export default function ParallaxScrollView({
+export const ParallaxScrollView = ({
   children,
   headerImage,
   headerBackgroundColor,
-}: Props) {
+}: ParallaxScrollViewProps) => {
   const colorScheme = useColorScheme() ?? 'light';
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
@@ -41,7 +43,7 @@ export default function ParallaxScrollView({
           scale: interpolate(scrollOffset.value, [-HEADER_HEIGHT, 0, HEADER_HEIGHT], [2, 1, 1]),
         },
       ],
-    };
+    } as DefaultStyle;
   });
 
   return (
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 32,
+    padding: Spacings.lg,
     gap: 16,
     overflow: 'hidden',
   },
