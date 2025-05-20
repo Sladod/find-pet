@@ -9,20 +9,16 @@ type Item = {
     value: string;
 };
 
-const items: Item[] = [
-    { label: 'Возраст', value: '16' },
-    { label: 'Порода', value: 'Неизвестно' },
-    { label: 'Вес', value: '3.5 кг' },
-    { label: 'Любимая игрушка', value: 'Мячик' },
-    { label: 'Пол', value: 'Женский' },
-];
+export type PetInfoListProps = {
+    data: Item[]
+}
 
-export const PetInfoList = () => {
+export const PetInfoList = ({ data }: PetInfoListProps) => {
     const labelColor = useThemeColor({}, 'gray')
 
     return (
         <View style={styles.container}>
-            {items.map(({ label, value }, index) => (
+            {data.map(({ label, value }, index) => (
                 <View key={index} style={styles.item}>
                     <Text style={[styles.label, { color: labelColor }]}>{label}</Text>
                     <ThemedText type='default'>{value}</ThemedText>

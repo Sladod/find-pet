@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import {StyleProp, StyleSheet, View, ViewProps} from "react-native";
+import { StyleSheet, View, ViewProps} from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import {Radiuses} from "@/constants/Radiuses";
 import {Spacings} from "@/constants/Spacings";
@@ -9,11 +9,11 @@ export type CardProps = PropsWithChildren<{
     darkColor?: string;
 }> & ViewProps
 
-export const Card = ({ children, lightColor, darkColor, style }: CardProps) => {
+export const Card = ({ children, lightColor, darkColor, style, ...props }: CardProps) => {
     const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'surface');
 
     return (
-        <View style={[{ backgroundColor }, styles.card, style] as StyleProp<ViewProps>}>
+        <View style={[{ backgroundColor }, styles.card, style]} {...props}>
             {children}
         </View>
     )

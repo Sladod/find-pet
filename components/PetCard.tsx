@@ -15,7 +15,7 @@ export interface PetCardProps {
     age?: number
 }
 
-export const PetCard = ({ sex, age, label }: PetCardProps) => {
+export const PetCard = ({ sex, age, label, image }: PetCardProps) => {
     const background = useThemeColor({}, 'background')
     const router = useRouter();
 
@@ -26,7 +26,7 @@ export const PetCard = ({ sex, age, label }: PetCardProps) => {
 
     return (
         <View style={styles.card}>
-            <Image source={require('@/assets/images/img_1.png')} style={styles.coverImage} />
+            <Image source={{ uri: image }} style={styles.coverImage} />
             <View style={[{ backgroundColor: background }, styles.details]}>
                 <View>
                     <ThemedText type='defaultSemiBold'>{label}</ThemedText>
